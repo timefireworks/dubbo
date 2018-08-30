@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="dubbo-consumer"/>
+
+    <!--使用zookeeper注册中心-->
+    <dubbo:registry address="zookeeper://192.168.116.132:2181" />
+
+    <!--version的值不是数值也不会报错，只要保持一致就可以-->
+    <dubbo:reference id="helloService" interface="com.learning.service.HelloService" version="1.0.0"/>
+
+    <dubbo:reference id="helloService2" interface="com.learning.service.HelloService" version="2.0.0"/>
+
+    <dubbo:reference id="helloService3" interface="com.learning.service.HelloService" version="*"/>
+
+    <!--如果provider里面的服务带了版本号，consumer里面也必须带版本号属性，否则在获取该bean时会报错-->
+    <dubbo:reference id="helloService4" interface="com.learning.service.HelloService" />
+
+    <!--服务分组-->
+    <dubbo:reference id="helloService5" interface="com.learning.service.HelloService" group="alipay"/>
+
+    <dubbo:reference id="helloService6" interface="com.learning.service.HelloService" group="wechart"/>
+
+    <dubbo:reference id="helloService7" interface="com.learning.service.HelloService" group="*"/>
+
+
+
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:application name="dubbo-consumer"/>
+
+    <!--不使用注册中心-->
+    <dubbo:reference id="helloService1" interface="com.learning.service.HelloService" url="dubbo://localhost:20880" />
+
+    <!--使用muticast注册中心：比较简单不需要安装其他东西，适合练习调试-->
+    <dubbo:registry address="multicast://224.2.3.4:1234"/>
+
+    <dubbo:reference id="helloService2" interface="com.learning.service.HelloService" />
+
+    <!--使用zookeeper注册中心-->
+    <dubbo:registry address="zookeeper://192.168.116.132:2182" />
+
+    <dubbo:reference id="helloService3" interface="com.learning.service.HelloService" />
+
+    <!--使用redis注册中心-->
+    <dubbo:registry address="redis://192.168.116.132:6379" />
+
+    <dubbo:reference id="helloService4" interface="com.learning.service.HelloService" />
+
+</beans>
